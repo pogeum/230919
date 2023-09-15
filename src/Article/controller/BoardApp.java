@@ -1,8 +1,13 @@
+import Article.model.Article;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BoardApp {
     ArrayList<Article> articles = new ArrayList<>();
+    ArticleView articleView = new ArticleView(); // mvc로 뷰 나눈거 호출
 //    ArrayList<Comment> comments = new ArrayList<>();
     public void start() {
 
@@ -19,7 +24,7 @@ public class BoardApp {
         Scanner scan = new Scanner(System.in);
 //        ArrayList<String> titles = new ArrayList<>();
 //        ArrayList<String> contents = new ArrayList<>();
-        // ArrayList<Article> articles = new ArrayList<>();
+        // ArrayList<Article.model.Article> articles = new ArrayList<>();
         //articles : 객체배열 명
         //배열에 객체저장하는거
         int lastArticleId = 4;
@@ -47,10 +52,10 @@ public class BoardApp {
 
                 System.out.println("게시물이 등록되었습니다.");
             } else if (command.equals("list")) {
-                for (int i = 0; i < articles.size(); i++) {
-                    Article article = articles.get(i);
-                    printOut(article);
-                }
+                articleView.printArticles(articles);
+
+
+
 //추가 삭제 하면서 게시물객체 인덱스 자꾸 변함..또 배열 루프돌려서 변수명(게시물번호) 일치하는지 해서 찾음..
 
 
@@ -70,7 +75,7 @@ public class BoardApp {
 
                     article.setTitle(newTitle);
                     article.setContent(newTitle);
-                    //Article newArticle = new Article(newTitle, newContent, targetId);
+                    //Article.model.Article newArticle = new Article.model.Article(newTitle, newContent, targetId);
                     //수정한거 another객체로 또다시만들어서 .이케안하고위에처럼해도됨.
                     //articles.set(index, newArticle);// 원래 articles배열에 껴넣기.
                     System.out.println("수정이 완료되었습니다.");
@@ -105,19 +110,20 @@ public class BoardApp {
                 System.out.print("상세보기 할 게시물 번호를 입력해주세요 : ");
                 int targetId = scan.nextInt();
 
-                boolean isExist = false;
+                //boolean isExist = false;
 
                 Article article = findById(targetId);
 
                 if (article == null) {
                     System.out.print("없는 게시물입니다.");
                 } else {
-                    //article.setView();
-                    printOut(article);
-                    article.setView(article.getView() + 1);
-                    System.out.printf("조회수 : %d\n", article.getView());
-                    System.out.printf("댓글 목룍 : \n");
-                    article.viewComment();
+                    articleView.printArticleDetail(article);
+//                    //article.setView();
+//                    printOut(article);
+//                    article.setView(article.getView() + 1);
+//                    System.out.printf("조회수 : %d\n", article.getView());
+//                    System.out.printf("댓글 목룍 : \n");
+//                    article.viewComment();
 
 
                 }
@@ -136,10 +142,12 @@ public class BoardApp {
                 }
 
             } else if (command.equals("search")) {
+
+
                 System.out.print("검색 키워드를 입력해 주세요 : ");
                 String keyword = scan.nextLine();
 
-                ArrayList<Article> keywordList = new ArrayList<>();
+                ArrayList<Article> searchedArticles = new ArrayList<>();
                 Article target = null;
                 int j = 0;
 
@@ -150,11 +158,11 @@ public class BoardApp {
                     String title = article.getTitle();
                     //contains ->  true, false를반환하는 함수.
 
-                    boolean contains = title.contains(keyword);
+                    //boolean contains = title.contains(keyword);
 
-                    if (contains) {
+                    if (title.contains(keyword)) {
                         // printOut(article);
-                        keywordList.add(article);
+                        searchedArticles.add(article);
                        /* target = article;
                     //굳이 이렇게 안 하고 바로 여기서 시세템아웃 출력 해도됨....아 그러네;; ㅅㅂ
                     //내가하려던건왜안됏던건지 알아내기.ㅇㅇ이제활용가능
@@ -162,6 +170,7 @@ public class BoardApp {
                         j++;*/
                     }
                 }
+                articleView.printArticles(searchedArticles);
 
                 //printarticles (0 인수 어레이리스트로 받고 위에꺼 함수에넣기.
                 //코드가 이원화 돼잇으면 똑같은건데 다르게 출력됨 -> 버그래.
@@ -169,7 +178,7 @@ public class BoardApp {
                 /*System.out.print("===================================\n");
                 for (int i = 0; i < keywordList.size(); i++) {
 
-                    Article article = articles.get(i);
+                    Article.model.Article article = articles.get(i);
 
                     System.out.printf("번호 : %d\n", article.getId());
                     System.out.printf("제목 : %s\n", article.getTitle());
@@ -191,6 +200,14 @@ public class BoardApp {
             }
         }
         return target;
+    }
+
+    public String getCurrentDate (){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+        String formatedNow = now.format(formatter);
+
+        return formatedNow;
     }
 
 
@@ -221,15 +238,15 @@ public class BoardApp {
     }
 
     //printOut 인수 어레이리스트로 받도록해서 다시 응용해보기.add.
-    public void printOut(Article a) {
-        System.out.println("=================================\n");
-        System.out.printf("번호 : %d\n", a.getId());
-        System.out.printf("제목 : %s\n", a.getTitle());
-        System.out.printf("내용 : %s\n", a.getContent());
-        System.out.printf("등록날짜 : %s\n", a.getCurrentTime());
-    }
+//    public void printOut(Article.model.Article a) {
+//        System.out.println("=================================\n");
+//        System.out.printf("번호 : %d\n", a.getId());
+//        System.out.printf("제목 : %s\n", a.getTitle());
+//        System.out.printf("내용 : %s\n", a.getContent());
+//        System.out.printf("등록날짜 : %s\n", a.getCurrentTime());
+//    }  이거 클래스로 따로 지정해서 거따넣어놈. 함수. mvc의 v
 
-//    public void viewComment(Article a) {
+//    public void viewComment(Article.model.Article a) {
 //        for (int i = 0; i < comments.size(); i++) {
 //            a.getCp(); //-> 코멘트객체반환
 //
@@ -237,13 +254,13 @@ public class BoardApp {
 //        }
 //    }
 //
-//    public void addcomment(Article article, String rrr) {
+//    public void addcomment(Article.model.Article article, String rrr) {
 //        article.setComment(rrr);
 //        comments.add(article.getCp());
 //    }
 
 /*
-    public static void viewComment(Article a){
+    public static void viewComment(Article.model.Article a){
 
         Comment comments = new Comment();
         System.out.print("=================================\n");

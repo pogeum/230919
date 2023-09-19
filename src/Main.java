@@ -1,10 +1,4 @@
-import com.sun.management.GarbageCollectionNotificationInfo;
-
-import java.lang.reflect.Array;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Scanner;
+import Article.controller.BoardApp;
 //alt + enter : 함수자동호출??
 //핵심 로직을 main 메서드에 작성하지 않응다. 클래스를 따로 만듦.
 

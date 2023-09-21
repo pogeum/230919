@@ -24,10 +24,6 @@ public class UserController {
 
        // userRepository.out();
 
-
-
-
-
     }
     public void login() {
 

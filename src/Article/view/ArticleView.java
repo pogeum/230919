@@ -16,6 +16,7 @@ public class ArticleView {
         System.out.printf("내용 : %s\n", article.getContent());
         System.out.printf("조회수 : %d\n", article.getHit());
         System.out.printf("등록일 : %s\n", article.getRegDate());
+        System.out.printf("작성자 : %d\n", article.getWriter());
 
         article.viewComment();
         //cmtv.printComments();

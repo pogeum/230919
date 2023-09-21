@@ -1,13 +1,21 @@
 package Article.model;
 
 import Article.model.User;
-
+import Article.controller.LoginUser;
 
 import java.util.ArrayList;
 
 public class UserRepository {
 
     ArrayList<User> users = new ArrayList<>();
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
 
     public UserRepository(){
         User p1 = new User("hong","gildong","홍길동");
@@ -39,6 +47,8 @@ public class UserRepository {
             if((user.getID().equals(id))&&(user.getPassword().equals(pw))){
                 System.out.printf("%s 님 환영합니다!\n\n", user.getNickname());
                 target = user;
+                LoginUser loginUser = new LoginUser(target);
+
             }
 
 

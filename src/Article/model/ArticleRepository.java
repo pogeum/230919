@@ -4,11 +4,15 @@ package Article.model;
 import Article.model.Article;
 
 import util.Util;
-
 import java.util.ArrayList;
+import Article.model.User;
+import Article.model.UserRepository;
 
 public class ArticleRepository {
     ArrayList<Article> articles = new ArrayList<>();
+//    ArticleRepository articleRepository = new ArticleRepository();
+    UserRepository userRepository = new UserRepository();
+    //User user = new User();
     int lastArticleId = 4;
 
     public ArticleRepository() {

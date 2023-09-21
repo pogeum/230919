@@ -11,6 +11,16 @@ public class Article {
     private String title; // 제목
     private String content; //내용
     private Comment comment;
+    private String writer;
+    public String getWriter() {
+        return writer;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
+
 
     private int hit;// 조회수
     private String regDate;
@@ -20,7 +30,6 @@ public class Article {
         this.title = title;
         this.content = content;
         this.regDate = regDate;
-        this.comment = null; //초기에는댓글이없..음..
     }
 
     public String getTitle() {

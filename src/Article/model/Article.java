@@ -25,6 +25,10 @@ public class Article {
     private int hit;// 조회수
     private String regDate;
 
+    public Article(){}
+    public Article(int id) {
+        this.id = id;
+    }
     public Article(int id, String title, String content, String regDate) {
         this.id = id;
         this.title = title;

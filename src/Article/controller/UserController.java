@@ -7,6 +7,13 @@ import Article.model.UserRepository;
 public class UserController {
     Scanner scan = new Scanner(System.in);
     UserRepository userRepository = new UserRepository();
+   // ArticleController ac = new ArticleController();
+
+    public LoginUser getLoginUser() {
+        return loginUser;
+    }
+
+    LoginUser loginUser;
 
     public void signup(){
 
@@ -31,11 +38,9 @@ public class UserController {
         String id = scan.nextLine();
         System.out.print("비밀번호 : ");
         String pw = scan.nextLine();
-        userRepository.finduserbyId(id,pw);
+        loginUser = userRepository.finduserbyId(id,pw);
+
 //        System.out.print("여기실행됏나\n");
-
-
-
 
     }
 }

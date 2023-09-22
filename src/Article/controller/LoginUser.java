@@ -5,6 +5,8 @@ public class LoginUser {
 
     private User loginuser;
 
+    LoginUser(){}
+
     public LoginUser(User a){
         this.loginuser = a;
     }

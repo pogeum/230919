@@ -13,6 +13,7 @@ public class BoardApp {
 
     ArticleController articleController = new ArticleController();
     UserController userController = new UserController();
+    //LoginUser loginUser = new LoginUser();
     Scanner scan = new Scanner(System.in);
 
     public void start() {
@@ -23,6 +24,7 @@ public class BoardApp {
                 System.out.println("프로그램을 종료합니다.");
                 break;
             } else if (command.equals("add")) {
+                articleController.setLoginUser(userController.getLoginUser());
                 articleController.add();
 
             } else if (command.equals("list")) {

@@ -1,33 +1,54 @@
 package Article.controller;
 
-import Article.model.Article;
-import Article.model.ArticleRepository;
-import Article.model.User;
-import Article.model.UserRepository;
+import Article.model.*;
+import util.Util;
 
-import Article.model.Comment; //어차피아티클가서하는거라 직접적인 커맨트클래스는 필요없다. 안쓰임.
+
 import Article.view.ArticleView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArticleController {
-    ArticleView articleView = new ArticleView();
+    ArticleView articleView = new ArticleView(); //이게이미composition인가?
     ArticleRepository articleRepository = new ArticleRepository();
-    UserRepository userRepository = new UserRepository();
-    LoginUser loginUser ;
-    Scanner scan = new Scanner(System.in);
 
+    Like like = new Like();
+
+    private LoginUser loginUser;
+
+    public void setLoginUser(LoginUser a){
+        this.loginUser = a;
+    }
+
+    //User linuser = new User();
+   // LoginUser loginUser = new LoginUser();//로그인유저에 전달메서드 잇어야되나?
+
+
+    Scanner scan = new Scanner(System.in);
+    int lastArticleId = 4; //초기화되면 또 4부터 시작인데 이거 실행 순서 잘살펴보기.
     public void add() {
+
+        Util util = new Util();
         System.out.print("게시물 제목을 입력해주세요 : ");
         String title = scan.nextLine();
         System.out.print("게시물 내용을 입력해주세요 : ");
         String content = scan.nextLine();
-        Article article = new Article();
-        articleRepository.insert(article);
+        Article article = new Article(lastArticleId,title,content,util.getCurrentDate());
+
+        //articleRepository.insert(article);
         if(loginUser != null){
+            article.setWriter(loginUser.getLoginuser().getNickname());
+            System.out.print("회원작성자 ㅇㅇ\n");
             //위에아티클에  writer넣어야되늰데
+        }else {
+            article.setWriter("익명");
+            System.out.print("익명작성자 ㅇㅇ\n");
         }
+        articleRepository.insert(article);
+        //System.out.printf("%d, %s",article.getId(),article.getWriter());
+
+        lastArticleId++;
 
         System.out.println("게시물이 등록되었습니다.");
        // ArrayList<User> user = new ArrayList<>();
@@ -100,7 +121,7 @@ public class ArticleController {
         } else {
             article.setHit(article.getHit()+1); //왜굳이 여기서 하냐
             articleView.printArticleDetail(article);
-            System.out.print("상세보기 기능을 선택해주세요(1.댓글 등록  2.추천  3.수정  4.삭제  5.목록으로) : ");
+            System.out.print("상세보기 기능을 선택해주세요(1.댓글 등록  2.좋아요  3.수정  4.삭제  5.목록으로) : ");
             int num = scan.nextInt();
             scan.nextLine();
 
@@ -113,6 +134,12 @@ public class ArticleController {
                 // c++ c번째댓글,.,.,추가.,.,
             }
             if(num==2){
+                if(loginUser != null){
+                    like.setUser(loginUser.getLoginuser());
+                } else {
+                    System.out.print("로그인 후 이용하세요.\n");
+                }
+
 
             }
             if(num==3){

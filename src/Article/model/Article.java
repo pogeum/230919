@@ -6,6 +6,19 @@ import Article.view.CommentView;
 
 public class Article {
     CommentRepository commentRepository = new CommentRepository();
+
+    public LikeRepository getLikeRepository() {
+        return likeRepository;
+    }
+
+    LikeRepository likeRepository = new LikeRepository();
+
+
+    public void addlike(Like a){
+        likeRepository.insert(a);
+    }
+
+
     CommentView cmtv = new CommentView();
     private int id; //게시물 번호
     private String title; // 제목
@@ -23,6 +36,16 @@ public class Article {
 
 
     private int hit;// 조회수
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike() {
+        this.like++;
+    }
+
+    private int like;//좋아요수
     private String regDate;
 
     public Article(){}

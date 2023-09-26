@@ -1,6 +1,8 @@
 package Article.controller;
 
 import java.util.Scanner;
+
+import Article.model.LoginUser;
 import Article.model.User;
 import Article.model.UserRepository;
 

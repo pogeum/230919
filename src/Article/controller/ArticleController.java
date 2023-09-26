@@ -5,21 +5,33 @@ import util.Util;
 
 
 import Article.view.ArticleView;
+import Article.model.Like;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArticleController {
     ArticleView articleView = new ArticleView(); //이게이미composition인가?
+
     ArticleRepository articleRepository = new ArticleRepository();
 
-    Like like = new Like();
+
+    public ArticleRepository getArticleRepository() {
+        return articleRepository;
+    }
+
+
 
     private LoginUser loginUser;
+    private LikeRepository likeRepository;
 
     public void setLoginUser(LoginUser a){
         this.loginUser = a;
     }
+
+    public void setLikeRepository(LikeRepository a){this.likeRepository=a;}
+
+    //위에중요!
 
     //User linuser = new User();
    // LoginUser loginUser = new LoginUser();//로그인유저에 전달메서드 잇어야되나?
@@ -135,8 +147,33 @@ public class ArticleController {
             }
             if(num==2){
                 if(loginUser != null){
-                    like.setUser(loginUser.getLoginuser());
-                } else {
+                    String compare;
+                    compare = loginUser.getLoginuser().getNickname();
+                    LikeRepository lry = likeRepository.getLikerepository();
+                    Like likeuser = lry.findbyNick(compare);
+                    if(likeuser==null){//해당 게시물에 좋아요리스트 하나도 없거나, 리스트 있는데 닉넴 일치일경우
+
+
+                        Util util = new Util();//if문안에 다시 넣어서, 값이잇으면 equals실행시켜야하는
+                        Like like2 = new Like(loginUser.getLoginuser(),article,util.getCurrentDate());
+                        article.setLike();//조아요수 늘리기
+                        article.addlike(like2);
+                        articleView.printArticleDetail(article);
+                    } else {
+                        if(likeuser.getUsernickname().equals(compare)) {
+                            System.out.print("이미 좋아요를 누르셨습니다.\n");
+                        }
+                        else{
+                            Util util = new Util();
+                            Like like2 = new Like(loginUser.getLoginuser(),article,util.getCurrentDate());
+                            article.setLike();
+                            article.addlike(like2);
+                            articleView.printArticleDetail(article);
+                        }
+                    }
+
+
+                } else { //로그인해도 왜 이것만출려;ㄱ;;;;;;;;;;객체또 새로 생성햇나보네;
                     System.out.print("로그인 후 이용하세요.\n");
                 }
 

@@ -1,9 +1,5 @@
 package Article.model;
 
-import Article.controller.ArticleController;
-import Article.model.User;
-import Article.controller.LoginUser;
-
 import java.util.ArrayList;
 
 public class UserRepository {

@@ -3,29 +3,33 @@ import util.Util;
 public class Like {
     private User user;
     private Article article;
-    private Util date;
+    private String date;
+
+    public Like(User u,Article a, String d){
+        this.user = u;
+        this.article = a;
+        this.date = d;
+
+    }
+
+    public String getUsernickname(){
+        return user.getNickname();
+    }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public Article getArticle() {
         return article;
     }
 
-    public void setArticle(Article article) {
-        this.article = article;
-    }
 
-    public Util getDate() {
+
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Util date) {
-        this.date = date;
-    }
+
 }

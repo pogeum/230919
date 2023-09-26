@@ -1,4 +1,4 @@
-package Article.controller;
+package Article.model;
 import Article.model.UserRepository;
 import Article.model.User;
 public class LoginUser {

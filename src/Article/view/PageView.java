@@ -8,18 +8,28 @@ public class PageView {
 
     ArticleView articleView = new ArticleView();//함수실행하는객체,.,
     // int i = 0;
+    private int underpagetotal;
+    private int pagenum;
 
-
-    public void printPage(int pagenum,ArrayList<Article> list){
-       // this.pageNow = num;//num은시작 인덱스값. 페이지수랑 조정 해야댐.
+    public int printPage(int pagenum, ArrayList<Article> list) {
         Article article;
+        int j = 3 * (pagenum - 1);
 
-        for(int i= 3 * (pagenum-1); i <= i+2 ; i++){ //이게..repository index번호로 돼야하는데
-            article = list.get(i);
-            articleView.printArticlePage(article);
+        if (j + 2 > (list.size() - 1)) {
+            for (int i = j; i < list.size(); i++) {
+                article = list.get(i);
+                articleView.printArticlePage(article);
 
-
+            }
+        } else {
+            for (int i = j; i <= j + 2; i++) {
+                article = list.get(i);
+                articleView.printArticlePage(article);
+            }
         }
+        return j;
     }
 
 }
+
+

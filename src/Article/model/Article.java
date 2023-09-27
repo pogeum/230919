@@ -23,8 +23,11 @@ public class Article {
     private int id; //게시물 번호
     private String title; // 제목
     private String content; //내용
-    private Comment comment;
-    private String writer;
+    private Comment comment;//댓글
+    private String writer;//작성자
+    private int like;//좋아요수
+    private String regDate;//작성일
+    private int hit;// 조회수
     public String getWriter() {
         return writer;
     }
@@ -35,7 +38,7 @@ public class Article {
 
 
 
-    private int hit;// 조회수
+
 
     public int getLike() {
         return like;
@@ -45,8 +48,6 @@ public class Article {
         this.like++;
     }
 
-    private int like;//좋아요수
-    private String regDate;
 
     public Article(){}
     public Article(int id) {

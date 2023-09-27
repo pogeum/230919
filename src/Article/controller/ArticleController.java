@@ -17,7 +17,9 @@ public class ArticleController {
 
 
     public ArticleRepository getArticleRepository() {
-        return articleRepository;
+
+        return this.articleRepository;
+
     }
 
 
@@ -38,7 +40,7 @@ public class ArticleController {
 
 
     Scanner scan = new Scanner(System.in);
-    int lastArticleId = 4; //초기화되면 또 4부터 시작인데 이거 실행 순서 잘살펴보기.
+    int lastArticleId = 17;
     public void add() {
 
         Util util = new Util();
@@ -52,24 +54,17 @@ public class ArticleController {
         if(loginUser != null){
             article.setWriter(loginUser.getLoginuser().getNickname());
             System.out.print("회원작성자 ㅇㅇ\n");
-            //위에아티클에  writer넣어야되늰데
+
         }else {
             article.setWriter("익명");
             System.out.print("익명작성자 ㅇㅇ\n");
         }
         articleRepository.insert(article);
-        //System.out.printf("%d, %s",article.getId(),article.getWriter());
+
 
         lastArticleId++;
 
         System.out.println("게시물이 등록되었습니다.");
-       // ArrayList<User> user = new ArrayList<>();
-       // user = userRepository.getUsers();
-     /*   ArrayList<User> user = new ArrayList<>();
-        user = userRepository.getUsers();
-        if(user != null){
-            article.setWriter(user.get(0).getNickname());//계속 같은객체로 실행되는건지 질문.
-        }*/
 
 
     }
@@ -96,8 +91,6 @@ public class ArticleController {
             article.setTitle(newTitle);
             article.setContent(newContent);
 
-
-            //이거왜 새로운객체에 넣엇다가 재 대입 안하고 이렇게 하는지?? 단계하나줄인거임?
 
 
             System.out.println("수정이 완료되었습니다.");
@@ -140,10 +133,10 @@ public class ArticleController {
             if(num==1){
                 System.out.print("댓글 달기 : ");
                 String words = scan.nextLine();
-                //Comment comment = new Comment(words); //커맨트 객체 생성해서 바로 받음.
-                article.addComment(words); // 바로코멘트클래스 안하고 아티클로 접근하는이유 : 해당 아티클 객체에 연결된 커멘트 객체배열 접근하려고.
+
+                article.addComment(words);
                 System.out.println("댓글이 등록되었습니다.\n");
-                // c++ c번째댓글,.,.,추가.,.,
+
             }
             if(num==2){
                 if(loginUser != null){
@@ -158,6 +151,7 @@ public class ArticleController {
                         Like like2 = new Like(loginUser.getLoginuser(),article,util.getCurrentDate());
                         article.setLike();//조아요수 늘리기
                         article.addlike(like2);
+                        lry.insert(like2);
                         articleView.printArticleDetail(article);
                     } else {
                         if(likeuser.getUsernickname().equals(compare)) {
@@ -202,8 +196,11 @@ public class ArticleController {
             if(num==4){
                 UserRepository userRepository1 = new UserRepository();
                 ArrayList<User> users = new ArrayList<>();
-                users = userRepository1.getUsers();
-                if(users.get(0).getNickname().equals(article.getWriter())){
+                //users = userRepository1.getUsers();
+
+
+
+                if(loginUser.getLoginuser().getNickname().equals(article.getWriter())){
                     System.out.print("정말 게시물을 삭제하시겠습니까? (y/n)");
                     String yn = scan.nextLine();
                     if(yn.equals("y")){

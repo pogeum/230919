@@ -9,7 +9,7 @@ import Article.model.UserRepository;
 public class UserController {
     Scanner scan = new Scanner(System.in);
     UserRepository userRepository = new UserRepository();
-   // ArticleController ac = new ArticleController();
+    // ArticleController ac = new ArticleController();
 
     public LoginUser getLoginUser() {
         return loginUser;

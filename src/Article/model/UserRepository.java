@@ -27,38 +27,22 @@ public class UserRepository {
         users.add(a);
     }
 
-/*
-    public void out() {
-        System.out.printf("%s\n", users.get(0).getID());
-        System.out.printf("%s\n", users.get(0).getPassword());
-    }
-*/
+    public User finduserbyId(String id, String pw) {
 
-    public LoginUser finduserbyId(String id, String pw) {
-
-        User user = null; //이거 널 안될때도 잇고.. 걍 생ㅅ어자랑 public붙인거랑 뭐달라
+        User user = null;
         User target = null;
-        LoginUser loginUser = null;
-//        System.out.print("여기실행됏나\n");
         for(int i =0;i<users.size();i++){
             user = users.get(i);
             if((user.getID().equals(id))&&(user.getPassword().equals(pw))){
                 target = user;
-                loginUser = new LoginUser(target);
-//                ac.setLoginUser(loginUser);
-                System.out.printf("%s 님 환영합니다!\n\n", loginUser.getLoginuser().getNickname());
-
-                //LoginUser loginUser = new LoginUser(target);
-                //System.out.print(loginUser.getLoginuser().getNickname());
-
+                System.out.printf("%s 님 환영합니다!\n\n", target.getNickname());
             }
-
         }
         if (target == null){
             System.out.println("회원정보가 없습니다.\n");
         }
 
-        return loginUser;
+        return target;
 
     }
 }

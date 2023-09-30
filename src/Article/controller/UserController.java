@@ -2,20 +2,18 @@ package Article.controller;
 
 import java.util.Scanner;
 
-import Article.model.LoginUser;
 import Article.model.User;
 import Article.model.UserRepository;
 
 public class UserController {
     Scanner scan = new Scanner(System.in);
     UserRepository userRepository = new UserRepository();
-    // ArticleController ac = new ArticleController();
 
-    public LoginUser getLoginUser() {
+    private User loginUser;
+
+    public User getLoginUser() {
         return loginUser;
     }
-
-    LoginUser loginUser;
 
     public void signup(){
 
@@ -29,9 +27,7 @@ public class UserController {
         User user = new User(id,pw,nm);
         userRepository.insertuser(user);
         System.out.print("==== 회원가입이 완료되었습니다 ====\n");
-        //회원고유번호 발급해서 그걸로 구분하기. 아닌가..
 
-       // userRepository.out();
 
     }
     public void login() {
@@ -40,9 +36,7 @@ public class UserController {
         String id = scan.nextLine();
         System.out.print("비밀번호 : ");
         String pw = scan.nextLine();
-        loginUser = userRepository.finduserbyId(id,pw);
-
-//        System.out.print("여기실행됏나\n");
+        this.loginUser = userRepository.finduserbyId(id,pw);
 
     }
 }

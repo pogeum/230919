@@ -1,19 +1,12 @@
 package Article.model;
-//데이터를 저장해놓는 패키지 따로 만듦. mvc의 m
 
-import Article.model.Article;
 
 import util.Util;
 import java.util.ArrayList;
-import Article.model.User;
-import Article.model.UserRepository;
+
 
 public class ArticleRepository {
     ArrayList<Article> articles = new ArrayList<>();
-//    ArticleRepository articleRepository = new ArticleRepository();
-    UserRepository userRepository = new UserRepository();
-    //User user = new User();
-
 
     public ArticleRepository() {
         Article a1 = new Article(1, "안녕하세요 반갑습니다. 자바 공부중이에요.", "냉무", Util.getCurrentDate());
@@ -54,9 +47,7 @@ public class ArticleRepository {
     }
 
     public void insert(Article a) {
-        //Article article = new Article(lastArticleId, title, content, Util.getCurrentDate());
         articles.add(a);
-       // System.out.print(a.getWriter());
     }
 
     public void delete(Article article) {

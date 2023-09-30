@@ -1,14 +1,11 @@
 package Article.view;
 
 import Article.model.Article;
-import Article.model.CommentRepository;
-import Article.view.CommentView;
 
 import java.util.ArrayList;
 
 public class ArticleView {
 
-    CommentView cmtv = new CommentView();
     public void printArticleDetail(Article article) { // 함수임 상세보기 조회수랑 다나오는거
         System.out.println("=============================");
         System.out.printf("번호 : %d\n", article.getId());
@@ -22,9 +19,8 @@ public class ArticleView {
         } else {
             System.out.printf("좋아요 : ♥ %d\n",article.getLike());
         }
-        article.viewComment();
-        //cmtv.printComments();
-        System.out.println("===================");
+        //commentView.printComments(article.getCommentRepository());
+
     }
 
     public void printArticles(ArrayList<Article> list) { //함수임 목록보기

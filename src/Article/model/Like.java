@@ -1,5 +1,5 @@
 package Article.model;
-import util.Util;
+
 public class Like {
     private User user;
     private Article article;
@@ -13,21 +13,25 @@ public class Like {
     }
 
     public String getUsernickname(){
+
         return user.getNickname();
     }
 
     public User getUser() {
+
         return user;
     }
 
 
     public Article getArticle() {
+
         return article;
     }
 
 
 
     public String getDate() {
+
         return date;
     }
 

@@ -1,58 +1,55 @@
 package Article.model;
 
-import Article.model.Comment;
-import Article.model.CommentRepository;
-import Article.view.CommentView;
-
 public class Article {
-    CommentRepository commentRepository = new CommentRepository();
+    private CommentRepository commentRepository = new CommentRepository();
 
     public LikeRepository getLikeRepository() {
+
         return likeRepository;
     }
 
     LikeRepository likeRepository = new LikeRepository();
 
 
-    public void addlike(Like a){
+    public void addlikeuser(Like a) {
+
         likeRepository.insert(a);
     }
-
-
-    CommentView cmtv = new CommentView();
     private int id; //게시물 번호
     private String title; // 제목
     private String content; //내용
-    private Comment comment;//댓글
     private String writer;//작성자
     private int like;//좋아요수
     private String regDate;//작성일
     private int hit;// 조회수
+
     public String getWriter() {
-        return writer;
+
+        return this.writer;
     }
 
     public void setWriter(String writer) {
+
         this.writer = writer;
     }
 
 
-
-
-
     public int getLike() {
+
         return like;
     }
 
-    public void setLike() {
-        this.like++;
+    public void incrementLike() {
+        this.like ++;
+    }
+    public void decrementLike() {
+        this.like --;
     }
 
 
-    public Article(){}
-    public Article(int id) {
-        this.id = id;
+    public Article() {
     }
+
     public Article(int id, String title, String content, String regDate) {
         this.id = id;
         this.title = title;
@@ -81,6 +78,7 @@ public class Article {
     }
 
     public void setId(int id) {
+
         this.id = id;
     }
 
@@ -96,81 +94,17 @@ public class Article {
         return hit;
     }
 
-    public void setHit(int hit) {
-        this.hit = hit;
+    public void setHit() {
+
+        this.hit ++;
     }
 
-    public void addComment(String str) {
-        Comment comment = new Comment();
-        comment.setSentence(str);
+    public void addComment(Comment comment) {
+
         commentRepository.insert(comment);
-        this.comment = comment;
-
-
-        //Comment comment(c) = new Comment(str);//커맨트객체생성해서 받음. 생성자와동시에 객체생성?
-        //어레이리스트에 에드.
-        // cmtptr.setSentence();//bb
     }
+    public CommentRepository getCommentRepository() {
 
-    public void viewComment(){
-        System.out.printf("<댓글목록>\n");
-        cmtv.printComments(commentRepository);
+        return this.commentRepository;
     }
-
-
-
-
-
-
-
-
-
 }
-
-
-//    public void setComment(String aaa){
-//
-//        cp.setSentence(aaa);
-//    }
-//
-//
-//
-//
-//
-//
-//    public void viewComment() {
-//        for (int i = 0; i < comments.size(); i++) {
-//
-//            System.out.printf("%s\n",comments.get(i).getSentence());
-//        }
-//    }
-//
-//    public void addcomment(String rrr) {
-//        Comment abc = new Comment();
-//        abc.setSentence(rrr);
-//        comments.add(abc);
-//    }
-//
-//
-//}
-//조회수 : 게시물 기능의 일부 -> 비즈니스 로직, 서비스 로직 ->  데이터랑 분리해놔야 좋대. 아티클 클래스에 함수정의하면 X.
-//데이터를 처리하는 행위를 여기서 하면 안좋대.
-
-/*class Comment extends Article.model.Article{
-
-}
-class Comment extends Article.model.Article {
-
-
-
-    private String sentence;
-
-    public String getSentence() {
-        return sentence;
-    }
-
-    public void setSentence(String sentence) {
-        this.sentence = sentence;
-    }
-}*/
-

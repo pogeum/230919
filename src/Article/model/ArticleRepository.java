@@ -2,6 +2,8 @@ package Article.model;
 
 
 import util.Util;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -59,6 +61,17 @@ public class ArticleRepository {
         return articles;
     }
 
+
+    public void printArticlelist() { //함수임 목록보기 ㅇㅣ것도 레파지토리에 넣으
+        // 는게 더 낫다는데. , ArrayList에 저장된 데이터를 출력하는 것도 데이터 처리에 해당합니다.
+        // 이러한 데이터 처리 로직은 일반적으로 MVC (Model-View-Controller) 아키텍처에서
+        // Model 부분에 해당합니다.
+        System.out.println("==================");
+        for (Article article : articles) {
+            System.out.println(article);
+            System.out.println("==================");
+        }
+    }
     public Article findById(int id) {
         Article target = null;
 

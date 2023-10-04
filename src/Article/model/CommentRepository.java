@@ -10,10 +10,16 @@ public class CommentRepository {
 
     }
 
-    public ArrayList<Comment> getarr(){
+    public ArrayList<Comment> getComments(){
         return comments;
 
     }
-
+    public void printComments() {
+        System.out.println("---------------------");
+        for (Comment comment : comments) {
+            System.out.println(comment);
+            System.out.println("---------------------");
+        }
+    }
 
 }

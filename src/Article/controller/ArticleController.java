@@ -13,7 +13,7 @@ public class ArticleController {
     ArticleView articleView = new ArticleView();
     CommentView commentView = new CommentView();
     ArticleRepository articleRepository = new ArticleRepository();
-    CommentRepository commentRepository = new CommentRepository();
+    //왜 안쓰이는지? -> CommentRepository commentRepository = new CommentRepository();
 
 
     public ArticleRepository getArticleRepository() {
@@ -24,15 +24,15 @@ public class ArticleController {
 
 
     private User loginUser;
-    private LikeRepository likeRepository;
+    //private LikeRepository likeRepository;
 
     public void setLoginUser(User a) {
         this.loginUser = a;
     }
 
-    public void setLikeRepository(LikeRepository a) {
-        this.likeRepository = a;
-    }
+//    public void setLikeRepository(LikeRepository a) {
+//        this.likeRepository = a;
+//    }
 
     //위에중요!
 
@@ -66,7 +66,7 @@ public class ArticleController {
 
     public void list() {
         ArrayList<Article> articles = articleRepository.findAllArticles();
-        articleView.printArticles(articles);
+        articleView.printArticles(articleRepository);
     }
 
     public void update() {
@@ -190,7 +190,7 @@ public class ArticleController {
         System.out.print("검색 키워드를 입력해주세요 : ");
         String keyword = scan.nextLine();
         ArrayList<Article> searchedArticles = articleRepository.findByTitle(keyword);
-        articleView.printArticles(searchedArticles);
+        articleView.printArticles(articleRepository);
     }
 
 }

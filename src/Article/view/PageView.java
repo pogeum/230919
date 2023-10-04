@@ -8,12 +8,12 @@ public class PageView {
 
     ArticleView articleView = new ArticleView();//함수실행하는객체,.,
     // int i = 0;
-    private int underpagetotal;
-    private int pagenum;
-
     public int printPage(int pagenum, ArrayList<Article> list) {
         Article article;
-        int j = 3 * (pagenum - 1);
+
+        int itemCountPerPage = 3;
+
+        int j = itemCountPerPage * (pagenum - 1);
 
         if (j + 2 > (list.size() - 1)) {
             for (int i = j; i < list.size(); i++) {

@@ -13,7 +13,7 @@ public class PageController {
     PageView pageView = new PageView();//메서드 실행 위한 객체?포인터?참조변수? 정의.
 
     private ArrayList<Article> articles = new ArrayList<>();
-    //private ArticleRepository articleRepository;
+
     public void setArticleRepository(ArticleRepository articleRepository) {
         //this.articleRepository = articleRepository;
         this.articles = articleRepository.findAllArticles();

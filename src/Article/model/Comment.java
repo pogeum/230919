@@ -6,19 +6,14 @@ public class Comment {
     public Comment(String sentence) {
         this.sentence = sentence;
     }
+
     public String getSentence() {
 
         return sentence;
     }
 
-
-
-
-
-
-
-
-
-
+    public String toString() {
+        return "댓글 : " + this.sentence ;
+    }
 
 }

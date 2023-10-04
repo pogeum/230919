@@ -1,5 +1,7 @@
 package Article.model;
 
+import java.util.ArrayList;
+
 public class Article {
     private CommentRepository commentRepository = new CommentRepository();
 
@@ -107,4 +109,12 @@ public class Article {
 
         return this.commentRepository;
     }
+
+    public String toString(){
+        return "번호 : " + this.id + "\n제목 : " + this.title + "\n등록날짜 : " + this.regDate ;
+    }
+
+
+
+
 }

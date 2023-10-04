@@ -9,10 +9,6 @@ public class LikeRepository {
         likerepository.add(like);
     }
 
-    public LikeRepository getLikerepository(){
-
-        return this;
-    }
 
     public Like findbyNick(String nickname){
         Like target=null;
